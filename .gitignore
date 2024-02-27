@@ -1,0 +1,46 @@
+# .NET Core
+bin/
+obj/
+
+# Visual Studio Code
+.vscode/
+
+# Visual Studio files
+*.user
+*.suo
+*.cache
+*.pdb
+*.dll
+*.exe
+*.log
+*.vs
+
+# Rider files
+.idea/
+
+# Package files
+*.nupkg
+*.paket-files/
+*.lock.json
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Ll]og/
+[Ll]ogs/
+
+# Local history
+.localhistory/
+
+# Temporary files
+*.DS_Store
+Thumbs.db
+*.tmp
