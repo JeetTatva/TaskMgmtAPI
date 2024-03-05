@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using TaskMgmtApi.Models;
+using TaskMgmtApi.Repositories;
 
 namespace TaskMgmtApi.Controllers
 {
@@ -7,63 +8,41 @@ namespace TaskMgmtApi.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private static List<User> users = [
-            new User
-            {
-                Id = 1,
-                Name = "Jeet",
-                Email = "jeet@test.com",
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
-            }
-        ];
+        private readonly UserRepository _userRepository;
+
+        public UserController()
+        {
+            _userRepository = new UserRepository();
+        }
 
         [HttpGet]
         public async Task<ActionResult<List<User>>> GetAllUsers()
         {
-            return Ok(users);
+            return  _userRepository.GetUsers();
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetSingleUser(int id)
         {
-            var user = users.Find(x => x.Id == id);
-            if (user is null)
-            {
-                return NotFound("User not found!");
-            }
-            return Ok(user);
+            return _userRepository.GetUser(id);
         }
 
         [HttpPost]
-        public async Task<ActionResult<User>> AddUser(User user)
+        public async Task<ActionResult<User>> AddUser(string name, string email)
         {
-            users.Add(user);
-            return Ok(user);
+            return _userRepository.AddUser(name, email);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<User>> UpdateUser(int id, User request)
+        public async Task<ActionResult<User>> UpdateUser(int id, string name, string email)
         {
-            var user = users.Find(x => x.Id == id);
-            if(user is null) {
-                return NotFound("User not found");
-            }
-            user.Name = request.Name;
-            user.Email = request.Email;
-            user.UpdatedAt = DateTime.Now;
-            return Ok(user);
+            return _userRepository.UpdateUser(id, name, email);
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<User>> DeleteUser(int id)
         {
-            var user = users.Find(x => x.Id == id);
-            if(user is null) {
-                return NotFound("User not found");
-            }
-            users.Remove(user);
-            return Ok(user);
+            return _userRepository.DeleteUser(id);
         }
 
     }
