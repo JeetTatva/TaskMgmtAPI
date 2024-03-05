@@ -4,10 +4,10 @@ using TaskMgmtApi.Models;
 
 namespace TaskMgmtApi.Repositories
 {
-    public class DBUserRepository : IUserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly AppDbContext _context;
-        public DBUserRepository(AppDbContext context)
+        public UserRepository(AppDbContext context)
         {
             _context = context;
         }

@@ -15,7 +15,7 @@ builder.Services.AddSwaggerGen(c =>
     // c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "YourApi.xml"));
 });
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddScoped<IUserRepository, DBUserRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 
