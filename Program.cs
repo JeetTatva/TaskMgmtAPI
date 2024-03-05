@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using TaskMgmtApi.Data;
+using TaskMgmtApi.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddSwaggerGen(c =>
     // c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "YourApi.xml"));
 });
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IUserRepository, DBUserRepository>();
 
 var app = builder.Build();
 

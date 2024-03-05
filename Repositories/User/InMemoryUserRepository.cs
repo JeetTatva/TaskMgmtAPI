@@ -3,7 +3,7 @@ using TaskMgmtApi.Models;
 namespace TaskMgmtApi.Repositories
 {
 
-    public class UserRepository : IUserRepository
+    public class UserRepository
     {
         private static List<User> DataSource()
         {
