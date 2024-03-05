@@ -17,11 +17,11 @@ namespace TaskMgmtApi.Repositories
             return users;
         }
 
-        public async Task<User> GetUser(int id) {
+        public async Task<User?> GetUser(int id) {
             return await _context.Users.FirstOrDefaultAsync(item => item.Id == id);
         }
 
-        public async Task<User> AddUser(string name, string email) {
+        public async Task<User?> AddUser(string name, string email) {
             int count = _context.Users.Count();
             User user = new User() {
                 Id = count+1,
@@ -35,8 +35,8 @@ namespace TaskMgmtApi.Repositories
             return user;
         }
 
-        public async Task<User> UpdateUser(int id, string name, string email) {
-            User user = _context.Users.FirstOrDefault(item => item.Id == id);
+        public async Task<User?> UpdateUser(int id, string name, string email) {
+            User? user = _context.Users.FirstOrDefault(item => item.Id == id);
             if(user != null) {
                 user.Name = name;
                 user.Email = email;
@@ -46,11 +46,11 @@ namespace TaskMgmtApi.Repositories
             return user;
         }
 
-        public async Task<User> DeleteUser(int id) {
-            User user = _context.Users.FirstOrDefault(item => item.Id == id);
+        public async Task<User?> DeleteUser(int id) {
+            User? user = _context.Users.FirstOrDefault(item => item.Id == id);
             if(user != null) {
                 _context.Users.Remove(user);
-                _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
             return user;
         }

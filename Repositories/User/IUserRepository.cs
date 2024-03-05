@@ -5,9 +5,9 @@ namespace TaskMgmtApi.Repositories
     public interface IUserRepository
     {
         Task<List<User>> GetUsers();
-        Task<User> GetUser(int id);
-        Task<User> AddUser(string name, string email);
-        Task<User> UpdateUser(int id, string name, string email);
-        Task<User> DeleteUser(int id);
+        Task<User?> GetUser(int id);
+        Task<User?> AddUser(string name, string email);
+        Task<User?> UpdateUser(int id, string name, string email);
+        Task<User?> DeleteUser(int id);
     }
 }
