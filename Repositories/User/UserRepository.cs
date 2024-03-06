@@ -12,8 +12,14 @@ namespace TaskMgmtApi.Repositories
             _context = context;
         }
 
-        public async Task<List<User>> GetUsers() {
-            List<User> users = await _context.Users.ToListAsync();
+        public async Task<List<User>> GetUsers(int? pageNumber = null, int? pageSize = null) {
+            IQueryable<User> query = _context.Users.OrderBy(u => u.Id);
+            if(pageNumber.HasValue && pageSize.HasValue)
+            {
+                int itemsToSkip = (pageNumber.Value - 1) * pageSize.Value;
+                query = query.Skip(itemsToSkip).Take(pageSize.Value);
+            }
+            List<User> users = await query.ToListAsync();
             return users;
         }
 

@@ -16,11 +16,11 @@ namespace TaskMgmtApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<User>>> GetAllUsers()
+        public async Task<ActionResult<List<User>>> GetAllUsers(int? pageNumber = null, int? pageSize = null)
         {
             try
             {
-                return await _userRepository.GetUsers();
+                return await _userRepository.GetUsers(pageNumber, pageSize);
             }
             catch (Exception ex)
             {
