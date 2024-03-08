@@ -38,6 +38,7 @@ namespace TaskMgmtApi.Repositories
             };
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
+            // notification test
             return user;
         }
 
