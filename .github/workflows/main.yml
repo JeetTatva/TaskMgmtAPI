@@ -1,15 +1,19 @@
-name: MS Teams Notification
-on: [push, pull_request]
+name: Notify Microsoft Teams
+
+on:
+  push:
+    branches:
+      - main  # Adjust branch name as needed
+  pull_request:
+    types: [opened, reopened, closed, edited, assigned, review_requested, review_request_removed, labeled, unlabeled, synchronize]
 
 jobs:
-  build:
+  notify:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      # this is the new step
-      - uses: dchourasia/ms-teams-notification@1.0 #  or "./" if in a local set-up
-        if: always()
+      - name: Send Microsoft Teams notification
+        uses: wei/httppost-action@v1
         with:
-          github-token: ${{ github.token }}
-          webhook-uri: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          url: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          data: '{"text": "New push/pull request: ${{ github.repository }} - ${{ github.event_name }} by ${{ github.actor }}"}'
